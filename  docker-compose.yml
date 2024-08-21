@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  # Eureka Server
+  eureka-server:
+    image: eureka-server-image
+    container_name: eureka-server
+    ports:
+      - "8761:8761" # Eureka server port
+    networks:
+      - microservices
+
+  # PostgreSQL for users service
+  postgres-users:
+    image: postgres:latest
+    container_name: postgres-users
+    environment:
+      POSTGRES_DB: userdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qawsed?
+    ports:
+      - "5431:5432"
+    networks:
+      - microservices
+
+  # PostgreSQL for products service
+  postgres-products:
+    image: postgres:latest
+    container_name: postgres-products
+    environment:
+      POSTGRES_DB: productdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qawsed?
+    ports:
+      - "5432:5432"
+    networks:
+      - microservices
+
+  # PostgreSQL for orders service
+  postgres-orders:
+    image: postgres:latest
+    container_name: postgres-orders
+    environment:
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qawsed?
+    ports:
+      - "5433:5432"
+    networks:
+      - microservices
+
+  # Users microservice
+  users-service:
+    image: users-service-image
+    container_name: users-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/userdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: qawsed?
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - postgres-users
+      - eureka-server
+    networks:
+      - microservices
+
+  # Products microservice
+  products-service:
+    image: products-service-image
+    container_name: products-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-products:5432/productdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: qawsed?
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - postgres-products
+      - eureka-server
+    networks:
+      - microservices
+
+  # Orders microservice
+  orders-service:
+    image: your-orders-service-image
+    container_name: orders-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-orders:5432/orderdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: qawsed?
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - postgres-orders
+      - eureka-server
+    networks:
+      - microservices
+
+  # Gateway service
+  gateway-service:
+    image: gateway-service-image
+    container_name: gateway-service
+    environment:
+      SPRING_APPLICATION_NAME: gateway-service
+      SERVER_PORT: 8089
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    ports:
+      - "8089:8089"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices
+
+networks:
+  microservices:
+    driver: bridge
