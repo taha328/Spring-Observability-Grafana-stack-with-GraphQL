@@ -1,0 +1,26 @@
+<div>
+  <h2>User Management</h2>
+
+
+  <button (click)="toggleUsers()">User List</button>
+
+
+  <div *ngIf="users && users.length">
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.username }}
+      </li>
+    </ul>
+  </div>
+
+
+  <h3>Add New User</h3>
+  <form (ngSubmit)="addUser()">
+    <label for="username">Username:</label>
+    <input id="username" [(ngModel)]="newUser.username" name="username" required>
+    <button type="submit">Add User</button>
+  </form>
+
+
+  <p class="message">{{ message }}</p>
+</div>

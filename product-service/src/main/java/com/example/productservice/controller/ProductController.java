@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -26,11 +28,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductEntity> getProductById(@PathVariable Long id) {
-        ProductEntity product = productService.getProductById(id);
-        if (product != null) {
-            return ResponseEntity.ok(product);
+    @GetMapping("/all")
+    public ResponseEntity<List<ProductEntity>> getAllProducts() {
+        List<ProductEntity> products = productService.getAllProduct();
+        if (products != null) {
+            return ResponseEntity.ok(products);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

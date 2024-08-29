@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -18,13 +20,13 @@ public class UserController {
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> getUserbyId(@PathVariable long id) {
-        UserEntity user = userService.getUserById(id);
-        if (user != null) {
-            return ResponseEntity.ok(user);  // Return 200 OK with the user data
+    @GetMapping("/all")
+    public ResponseEntity<List<UserEntity>> getAllUsers() {
+        List<UserEntity> users = userService.getAllUsers();
+        if (users != null) {
+            return ResponseEntity.ok(users);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Return 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
     @PostMapping("/add")

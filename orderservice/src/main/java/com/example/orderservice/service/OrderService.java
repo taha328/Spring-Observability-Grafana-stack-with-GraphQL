@@ -4,8 +4,11 @@ import com.example.orderservice.client.ProductServiceClient;
 import com.example.orderservice.client.UserServiceClient;
 import com.example.orderservice.entities.OrderEntity;
 import com.example.orderservice.repository.OrderRepository;
+import com.example.productservice.entities.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -30,12 +33,14 @@ public class OrderService {
             throw new RuntimeException("Product not found");
         }
 
-        // Create and save the order
         OrderEntity order = new OrderEntity();
         order.setUserId(userId);
         order.setProductId(productId);
         order.setQuantity(quantity);
         return orderRepository.save(order);
     }
+    public List<OrderEntity> getAllProduct() {
+        return orderRepository.findAll();
 
-}
+
+    }}

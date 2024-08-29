@@ -5,6 +5,8 @@ import com.example.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -12,13 +14,15 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
     public UserEntity addUser(UserEntity user) {
-        return userRepository.save(user); // Return the saved user entity
+
+        return userRepository.save(user);
     }
-    public UserEntity getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
     }
 }
