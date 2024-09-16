@@ -5,7 +5,7 @@
   <button (click)="toggleUsers()">User List</button>
 
 
-  <div *ngIf="users && users.length">
+  <div >
     <ul>
       <li *ngFor="let user of users">
         {{ user.username }}

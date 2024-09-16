@@ -25,4 +25,7 @@ public class UserService {
     public List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
+    public UserEntity getUserById(long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

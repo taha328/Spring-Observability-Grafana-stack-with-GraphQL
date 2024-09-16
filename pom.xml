@@ -32,6 +32,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.loki4j/loki-logback-appender -->
+            <dependency>
+                <groupId>com.github.loki4j</groupId>
+                <artifactId>loki-logback-appender</artifactId>
+                <version>1.6.0-m1</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>1.13.4</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

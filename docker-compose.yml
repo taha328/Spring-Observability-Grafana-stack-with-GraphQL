@@ -3,10 +3,10 @@ version: '3.8'
 services:
   # Eureka Server
   eureka-server:
-    image: eureka-server-image
+    image: springcloud/eureka
     container_name: eureka-server
     ports:
-      - "8761:8761" # Eureka server port
+      - "8761:8761"
     networks:
       - microservices
 
@@ -51,10 +51,12 @@ services:
 
   # Users microservice
   users-service:
-    image: users-service-image
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
     container_name: users-service
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/userdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-users:5432/userdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: qawsed?
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
@@ -66,7 +68,9 @@ services:
 
   # Products microservice
   products-service:
-    image: products-service-image
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
     container_name: products-service
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-products:5432/productdb
@@ -81,7 +85,9 @@ services:
 
   # Orders microservice
   orders-service:
-    image: your-orders-service-image
+    build:
+      context: ./orderservice
+      dockerfile: Dockerfile
     container_name: orders-service
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-orders:5432/orderdb
@@ -96,7 +102,9 @@ services:
 
   # Gateway service
   gateway-service:
-    image: gateway-service-image
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
     container_name: gateway-service
     environment:
       SPRING_APPLICATION_NAME: gateway-service
@@ -109,6 +117,56 @@ services:
     networks:
       - microservices
 
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
+    networks:
+      - microservices
+
+  # Loki
+  loki:
+    image: grafana/loki:2.8.0
+    ports:
+      - '3100:3100'
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - C:/Users/taha_/OneDrive/Desktop/microservices-demo/loki-promtail/loki-config.yaml:/etc/loki/loki-config.yaml
+    networks:
+      - microservices
+
+  # Promtail
+  promtail:
+    image: grafana/promtail:2.8.0
+    volumes:
+      - C:/Users/taha_/OneDrive/Desktop/microservices-demo/loki-promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml
+      - C:/Users/taha_/OneDrive/Desktop/microservices-demo/user-service/logs:/var/log/user-service
+      - C:/Users/taha_/OneDrive/Desktop/microservices-demo/product-service/logs:/var/log/product-service
+      - C:/Users/taha_/OneDrive/Desktop/microservices-demo/order-service/logs:/var/log/order-service
+    command: -config.file=/etc/promtail/promtail-config.yaml
+    networks:
+      - microservices
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - microservices
+
 networks:
   microservices:
     driver: bridge
+
+volumes:
+  grafana-storage:

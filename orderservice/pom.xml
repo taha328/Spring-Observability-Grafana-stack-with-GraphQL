@@ -58,10 +58,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
 
         <!-- PostgreSQL dependency -->
         <dependency>
@@ -100,16 +96,50 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>product-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version> <!-- Use the actual version here -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.apollographql.federation</groupId>
+            <artifactId>federation-graphql-java-support-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.apollographql.apollo3/apollo-api-jvm -->
+        <dependency>
+            <groupId>com.apollographql.apollo3</groupId>
+            <artifactId>apollo-api-jvm</artifactId>
+            <version>4.0.0-beta.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.apollographql.apollo3/apollo-api -->
+        <dependency>
+            <groupId>com.apollographql.apollo3</groupId>
+            <artifactId>apollo-api</artifactId>
+            <version>4.0.0-beta.7</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/graphql-java-tools -->
+        <dependency>
+            <groupId>com.graphql-java-kickstart</groupId>
+            <artifactId>graphql-java-tools</artifactId>
+            <version>13.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/graphql-spring-boot-starter -->
+        <dependency>
+            <groupId>com.graphql-java-kickstart</groupId>
+            <artifactId>graphql-spring-boot-starter</artifactId>
+            <version>15.1.0</version>
+        </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+            </dependency>
+        <dependency>
+            <groupId>com.apollographql.federation</groupId>
+            <artifactId>federation-graphql-java-support</artifactId>
+            <version>5.2.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>user-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version> <!-- Use the actual version here -->
-        </dependency>
+
     </dependencies>
 
 
@@ -122,6 +152,28 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-graphql</artifactId>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.graphql-java/graphiql-spring-boot-starter -->
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphiql-spring-boot-starter</artifactId>
+                <version>5.0.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>graphql-webclient-spring-boot-starter</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-webflux -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webflux</artifactId>
+                <version>6.1.13</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

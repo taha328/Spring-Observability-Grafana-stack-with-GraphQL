@@ -1,0 +1,27 @@
+server:
+  http_listen_port: 3100
+
+ingester:
+  wal:
+    dir: /loki/wal
+  chunk_target_size: 1048576
+  max_chunk_age: 1h
+
+storage_config:
+  boltdb_shipper:
+    active_index_directory: /loki/index
+    cache_location: /loki/cache
+    shared_store: filesystem
+  filesystem:
+    directory: /loki/chunks
+
+limits_config:
+  max_streams_per_user: 1000
+
+chunks_storage_config:
+  boltdb_shipper:
+    shared_store: filesystem
+
+table_manager:
+  retention_deletes_enabled: true
+  retention_period: 7d

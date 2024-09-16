@@ -23,8 +23,14 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public List<ProductEntity> getAllProduct() {
+    public List<ProductEntity> getAllProducts() {
         return productRepository.findAll();
+    }
 
-    // Add other methods as needed (e.g., update, delete)
-}}
+    public ProductEntity getProductById(long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+
+
+}

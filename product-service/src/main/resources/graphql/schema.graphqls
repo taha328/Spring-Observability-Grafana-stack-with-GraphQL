@@ -1,0 +1,18 @@
+# Product schema in product-service
+
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    stockQuantity: Int!
+}
+
+type Query {
+    getAllProducts: [Product]
+    getProductById(id: ID!): Product
+}
+
+
+type Mutation {
+    addProduct(name: String!, price: Float!, stockQuantity: Int!): Product
+}

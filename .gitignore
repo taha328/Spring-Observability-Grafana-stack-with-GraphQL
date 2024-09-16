@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+# Ignore Angular frontend directory
+Angular-frontend/
+
+# Ignore node_modules folder
+node_modules/
+application.log/

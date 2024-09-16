@@ -18,9 +18,8 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId; // Reference to the user who placed the order
-    private Long productId; // Reference to the ordered product
+    private Long userId;
+    private Long productId;
     private Integer quantity;
 
-    // Optionally, add additional fields like order status, date, etc.
 }
