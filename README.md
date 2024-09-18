@@ -9,7 +9,8 @@ This project demonstrates GraphQL schema stitching for `user-service`, `product-
 
 ![GraphQL Schema Stitching](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*aC7w8OOb7IZie7wSSM7Rsw.png)
 
-# In the example below, the gateway (running at http://localhost:8089/graphql) allows us to query both the user-service and product-service in a single request.
+In the example below, the gateway (running at http://localhost:8089/graphql) allows us to query both the user-service and product-service in a single request.
+
 
 ![Demo](https://github.com/taha328/Spring-Observability-Grafana-stack-with-GraphQL/blob/main/images/Capture.PNG?raw=true)
 
@@ -23,4 +24,4 @@ Logs from the `user-service` microservice in a Grafana dashboard using **Loki** 
 - **Time Range**: The logs are displayed for the last 3 hours with a refresh interval of 10 seconds.
 - **Log Details**: The logs contain various messages, including startup processes, test executions, and
 
-![Demo](images/loki.png)  
+![Demo](https://github.com/taha328/Spring-Observability-Grafana-stack-with-GraphQL/blob/main/images/loki.PNG?raw=true)  
