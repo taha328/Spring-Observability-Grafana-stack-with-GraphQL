@@ -11,7 +11,7 @@ This project demonstrates GraphQL schema stitching for `user-service`, `product-
 
 # In the example below, the gateway (running at http://localhost:8089/graphql) allows us to query both the user-service and product-service in a single request.
 
-![Demo](images/Capture.png)
+![Demo](https://github.com/taha328/Spring-Observability-Grafana-stack-with-GraphQL/blob/main/images/Capture.PNG?raw=true)
 
 ## Loki Logs in Grafana Dashboard
 
