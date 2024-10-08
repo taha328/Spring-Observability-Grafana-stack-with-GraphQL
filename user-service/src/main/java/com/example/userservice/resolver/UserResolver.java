@@ -33,7 +33,8 @@ public class UserResolver {
     // Mutation to add a new user
     @MutationMapping
     public UserEntity addUser(@Argument String username) {
-        UserEntity user = new UserEntity(username);
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
         return userService.addUser(user);
     }
 }

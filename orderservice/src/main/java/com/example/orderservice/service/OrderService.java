@@ -27,7 +27,7 @@ public class OrderService {
     private RestTemplate restTemplate;
 
     public OrderService() {
-        // Default constructor
+
     }
 
     @Autowired
@@ -41,18 +41,18 @@ public class OrderService {
     }
 
     public OrderEntity createOrder(Long userId, Long productId, Integer quantity) {
-        // Set headers
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
 
-        // Create request body
+
         String userQuery = "{\"query\":\"{ getUserById(id: " + userId + ") { id, username } }\"}";
         String productQuery = "{\"query\":\"{ getProductById(id: " + productId + ") { id, name, price, stockQuantity } }\"}";
 
         HttpEntity<String> userRequest = new HttpEntity<>(userQuery, headers);
         HttpEntity<String> productRequest = new HttpEntity<>(productQuery, headers);
 
-        // Fetch User details
+
         ResponseEntity<UserEntity> userResponse = restTemplate.exchange(
                 "http://localhost:8081/graphql",
                 HttpMethod.POST,
@@ -61,7 +61,7 @@ public class OrderService {
         );
         UserEntity user = userResponse.getBody();
 
-        // Fetch Product details
+
         ResponseEntity<ProductEntity> productResponse = restTemplate.exchange(
                 "http://localhost:8082/graphql",
                 HttpMethod.POST,
